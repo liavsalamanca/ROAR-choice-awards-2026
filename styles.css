@@ -879,7 +879,7 @@ body.is-locked .fab-whatsapp { display: none; }
     .section__head .script { animation: scriptIn linear both; animation-timeline: view(); animation-range: entry 10% cover 35%; }
     .place__daynum { animation: dayScale linear both; animation-timeline: view(); animation-range: entry 0% cover 40%; display: inline-block; }
     @keyframes viewIn { from { opacity: .15; transform: translateY(28px); } to { opacity: 1; transform: none; } }
-    @keyframes scriptIn { from { opacity: 0; transform: translateX(-18px); clip-path: inset(0 100% 0 0); } to { opacity: 1; transform: none; clip-path: inset(0 0 0 0); } }
+    @keyframes scriptIn { from { opacity: 0; transform: translateX(-18px); clip-path: inset(-30% 100% -60% -10%); } to { opacity: 1; transform: none; clip-path: inset(-30% -10% -60% -10%); } }
     @keyframes dayScale { from { transform: scale(.85); opacity: .3; } to { transform: none; opacity: 1; } }
   }
 }
@@ -1599,3 +1599,51 @@ body { padding-bottom: 24px; }
 .rsvp .field-error { text-align: center; min-height: 1.2em; }
 .btn.is-pending { opacity: .6; }
 .amp { font-family: "Great Vibes", var(--script); font-size: 1.05em; padding: 0 .04em; }
+
+/* Cenefa realista (textura generada): reemplaza los festones de CSS */
+.has-valance .stage-valance {
+  -webkit-mask: none; mask: none; filter: drop-shadow(0 10px 14px rgba(0,0,0,.7));
+  height: clamp(72px, 11vw, 150px);
+  background: var(--valance-tex) 0 0 / auto 100% repeat-x !important;
+}
+.has-valance .stage-valance::before, .has-valance .stage-valance .valance__fringe { display: none; }
+.has-valance .valance { height: clamp(80px, 14vh, 160px); background: var(--valance-tex) center top / auto 100% repeat-x; }
+.has-valance .valance::before, .has-valance .valance__swags, .has-valance .valance .valance__fringe { display: none; }
+.has-valance .hero { padding-top: clamp(96px, 13vw, 170px); }
+/* Las letras caligráficas no se recortan */
+.section__title .script, .dc-title__script { padding-bottom: .12em; overflow: visible; }
+.has-valance .curtains .valance { display: none; }
+
+/* =====================================================================
+ * Telón con movimiento físico (franjas animadas desde app.js)
+ * ===================================================================== */
+.curtains { --stage-top: 0px; --valance-h: 0px; }
+.curtains::before { /* oscuridad del teatro alrededor del escenario */
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: var(--stage-top); background: var(--ink); }
+.curtains .curtain {
+  top: var(--stage-top); width: 51%; background: none !important; box-shadow: none; clip-path: none !important;
+  animation: none !important; overflow: visible;
+}
+.curtains .curtain::after { display: none; }
+.curtain-strip {
+  position: absolute; top: 0; bottom: 0; display: block; will-change: transform;
+  background-image:
+    linear-gradient(180deg, rgba(0,0,0,.45) 0%, rgba(0,0,0,0) 14%, rgba(0,0,0,0) 78%, rgba(0,0,0,.5) 100%),
+    var(--velvet-tex, var(--velvet-folds));
+  background-size: 100% 100%, auto 100%;
+  background-repeat: no-repeat, repeat-x;
+}
+.curtain-strip::after { /* bastilla con borde dorado */
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 22px;
+  background: linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.55)); border-top: 1px solid rgba(232,201,131,.35);
+}
+.curtain--left .curtain-strip--edge { box-shadow: 18px 0 30px -6px rgba(0,0,0,.75); }
+.curtain--right .curtain-strip--edge { box-shadow: -18px 0 30px -6px rgba(0,0,0,.75); }
+/* La cenefa del telón coincide exactamente con la del hero */
+.has-valance .curtains .valance { display: block; top: var(--stage-top); height: var(--valance-h); z-index: 3; }
+.curtains .curtain-tie { display: none; }
+.curtains__stage { top: var(--stage-top); transition: none; opacity: 0;
+  background:
+    radial-gradient(38% 60% at 50% 0%, rgba(255,226,180,.20), transparent 70%),
+    radial-gradient(60% 50% at 50% 40%, rgba(255,214,150,.12), transparent 70%); }
+.curtains.is-done { transition: opacity .9s ease; opacity: 0; }

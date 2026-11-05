@@ -1,0 +1,17 @@
+ROAR STUDIO CHOICE AWARDS 2026 - INVITACION
+
+Esta version tiene TODO dentro de index.html (diseno, textos, logos,
+imagenes del dress code, telon y codigo). No necesita carpetas.
+
+Archivos:
+  index.html    la invitacion completa
+  og-image.jpg  imagen que muestra WhatsApp al compartir el enlace
+
+Como publicarla en GitHub (repositorio ROAR-choice-awards-2026):
+  1. Borra todos los archivos que tenga el repositorio.
+  2. Add file > Upload files > arrastra index.html y og-image.jpg > Commit changes.
+  3. Settings > Pages > Deploy from a branch > main > / (root) > Save.
+  4. Abre https://liavsalamanca.github.io/ROAR-choice-awards-2026/
+
+Enlace con el nombre del invitado:
+  https://liavsalamanca.github.io/ROAR-choice-awards-2026/?para=Nombre%20Apellido
